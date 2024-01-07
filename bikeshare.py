@@ -20,7 +20,7 @@ def get_filters():
     valid_months = {'january', 'february', 'march', 'april', 'may', 'june', 'all'}
     valid_days = {'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'all'}
     print('Hello! Let\'s explore some US bikeshare data!')
-    # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+    
     while True:
         try:
             input_city = input("Enter one of the city names (chicago, new york city, washington) that you would like to analyze: ").lower()
@@ -78,15 +78,16 @@ def time_stats(df):
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
-    # TO DO: display the most common month
+    
     month_index = df['month'].mode()[0]
     print('Most Common Month:', ALL_MONTHS[month_index-1].capitalize(), '\n')
-    # TO DO: display the most common day of week
+    
     day = df['day'].mode()[0]
     print('Most Common Day:', day, '\n')
-    # TO DO: display the most common start hour    
+    
     df['hour'] = df['Start Time'].dt.hour
     print('Most Common Start Hour:', df['hour'].mode()[0], '\n')
+    
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -101,16 +102,15 @@ def station_stats(df):
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
 
-    # TO DO: display most commonly used start station
     start_station = df['Start Station'].mode()[0]
     print('Most Common Start Station:', start_station, '\n')
 
-    # TO DO: display most commonly used end station
     end_station = df['End Station'].mode()[0]
     print('Most Common End Station:', end_station, '\n')
     
     most_frequent = df[['Start Station', 'End Station']].mode().iloc[0]
     print("Most Frequent Combination of Start Station and End Station:\nStart Station: ", most_frequent[0], '\nEnd Station: ' , most_frequent[1],"\n")
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -125,17 +125,16 @@ def trip_duration_stats(df):
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
-    # TO DO: display total travel time
     total_travel_time = df['Trip Duration'].sum()
     minutes = total_travel_time / 60
     hours = minutes / 60
     print('Total Travel Time:', total_travel_time, 'seconds =', minutes, 'minutes =', hours, 'hours' )
 
-    # TO DO: display mean travel time
     mean_travel_time = df['Trip Duration'].mean()
     minutes = mean_travel_time / 60
     hours = minutes / 60
     print('Mean Travel Time:', mean_travel_time, 'seconds =', minutes, 'minutes =', hours, 'hours' )
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -150,19 +149,15 @@ def user_stats(df):
     print('\nCalculating User Stats...\n')
     start_time = time.time()
 
-    # TO DO: Display counts of user types
     count_user_types = df['User Type'].value_counts()
-#     print('Value count', df['User Type'].value_counts())
     print('Count By User Types:\n', count_user_types , '\n')
 
-    # TO DO: Display counts of gender
     try:
         count_gender = df['Gender'].value_counts()
         print('Count By Gender:\n', count_gender, '\n')
     except:
         print('This dataset does Not contain any gender data. Therefore a calculation will not be computed for Gender')
 
-    # TO DO: Display earliest, most recent, and most common year of birth
     try:
         early_birth = df['Birth Year'].min()
         recent_birth = df['Birth Year'].max()
@@ -187,6 +182,7 @@ def raw_data(iterable, n_rows):
     """
     print('\nCalculating User Stats...\n')
     start_time = time.time()
+
     i = 0
     ln = len(iterable)
     while i < ln:
@@ -196,6 +192,7 @@ def raw_data(iterable, n_rows):
             i += n_rows
         else:
             break 
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
     
@@ -215,7 +212,6 @@ def main():
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
-
 
 if __name__ == "__main__":
 	main()
